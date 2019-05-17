@@ -1,0 +1,23 @@
+{
+    "env": {
+        "test": {
+            "presets": [["es2015"], "stage-0", "react"],
+            "plugins": [
+                "transform-es2015-modules-commonjs",
+            ]
+        }
+    },
+    "presets": [
+        // Because web­pack sup­ports import and export,
+        // we don’t need ba­bel to han­dle these in pro­duc­tion.
+        ["es2015", { "modules": false }],
+        "stage-0",
+        "react"
+    ],
+    "plugins": [
+        "react-hot-loader/babel",
+        "syntax-dynamic-import",
+        "transform-object-assign",
+        "transform-decorators-legacy"
+    ]
+}
