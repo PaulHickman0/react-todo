@@ -8,7 +8,7 @@ Start dev server: `npm start`
 
 ## Tests
 
-I have added a few tests for the main list page and the list item component. These are not complete, however they cover a few of the basic functionality.
+I have added a few tests for the main list page and the list item component. These are not complete, however they cover most of the basic functionality.
 
 ### Running the tests
 
