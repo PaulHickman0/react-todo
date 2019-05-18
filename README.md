@@ -1,2 +1,2 @@
-# react-image-gallery
-A simple react app for displaying images and albums
+# react-todo-list
+A simple react app for displaying and creating a list of todo's
