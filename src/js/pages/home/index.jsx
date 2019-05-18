@@ -19,6 +19,7 @@ export class Home extends Component {
 
     // Default props
     static defaultProps = {
+
     };
 
     constructor(props) {
@@ -38,10 +39,18 @@ export class Home extends Component {
         window.scrollTo(0, 0);
     }
 
+    /**
+     * Gets list items that have the status of 'todo'
+     * @return {Array}   - List items that have status: 'todo'
+     */
     get todoListItems () {
         return this.state.listItems.filter(item => item.status === 'todo');
     }
 
+    /**
+     * Gets list items that have the status of 'done'
+     * @return {Array}   - List items that have status: 'done'
+     */
     get doneListItems () {
         return this.state.listItems.filter(item => item.status === 'done');
     }
@@ -69,7 +78,7 @@ export class Home extends Component {
 
     /**
      * Adds a new item to the list of todo's
-     * @param {String]} itemText   - Message for the new todo item
+     * @param {String} itemText   - Message for the new todo item
      */
     addToList(itemText) {
 
