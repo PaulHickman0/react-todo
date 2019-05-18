@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './home.scss';
 
 import FormatLayout from 'components/format-layout';
+import ListItem from 'components/list-item';
 
 /**
  * Home page component
@@ -34,7 +35,10 @@ export class Home extends Component {
             <div className="home">
                 <FormatLayout>
                     <h1>To Do List</h1>
-                    
+                    <ListItem
+                        itemNumber={1}
+                        message="This is my todo"
+                    />
                 </FormatLayout>
             </div>
         );
