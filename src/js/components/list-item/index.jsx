@@ -6,13 +6,15 @@ export default class ListItem extends PureComponent {
     // Prop types
     static propTypes = {
         message: PropTypes.string,
-        itemNumber: PropTypes.number,
+        itemNumber: PropTypes.oneOfType(PropTypes.number, PropTypes.string),
+        onClick: PropTypes.func,
     };
 
     // Default props
     static defaultProps = {
         message: '',
         itemNumber: '',
+        onClick: () => null
     };
 
     constructor(props) {
@@ -21,11 +23,14 @@ export default class ListItem extends PureComponent {
 
     render() {
 
-        const { itemNumber, message } = this.props;
+        const { itemNumber, message, onClick, status } = this.props;
 
         return (
-            <div className="c-list-item">
-                <h4>{itemNumber}. {message}</h4>
+            <div
+                className={`c-list-item ${status === 'done' ? 'is-done' : ''}`}
+                onClick={onClick}
+            >
+                <h4>{itemNumber ? `${itemNumber}. ` : ''}{message}</h4>
             </div>
         );
     }

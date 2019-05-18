@@ -24,9 +24,7 @@ export class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listItems: [{
-                messsage: ''
-            }],
+            listItems: [],
             newItemText: ''
         }
 
@@ -38,6 +36,13 @@ export class Home extends Component {
         window.scrollTo(0, 0);
     }
 
+    get todoListItems () {
+        return this.state.listItems.filter(item => item.status === 'todo');
+    }
+
+    get doneListItems () {
+        return this.state.listItems.filter(item => item.status === 'done');
+    }
 
     /**
      * Used to set the value of the text input
@@ -73,15 +78,37 @@ export class Home extends Component {
             listItems: [
                 ...listItems,
                 {
-                    message: itemText
+                    message: itemText,
+                    status: 'todo',
+                    id: listItems.length + 1,
                 }
             ]
         })
     }
 
+    /**
+     * Changes a status of an item eg. to 'done'
+     * @param  {Number} id          - item ID of item to change
+     * @param  {String} status      - new status of item
+     */
+    changeItemStatus(id, status = 'done') {
+
+        const { listItems } = this.state;
+        const newItems = [...listItems];
+        const newItem = newItems.find(item => item.id === id);
+
+        if (newItem) {
+            newItem.status = status;
+        }
+
+        this.setState({
+            listItems: newItems
+        });
+    }
+
     render() {
 
-        const { listItems, newItemText } = this.state;
+        const { newItemText } = this.state;
 
         return (
             <div className="home">
@@ -102,13 +129,28 @@ export class Home extends Component {
                             Add To List
                         </button>
                     </div>
-                    {listItems.map((item, index) => (
-                        <ListItem
-                            key={`List Item ${index}`}
-                            itemNumber={index + 1}
-                            {...item}
-                        />
-                    ))}
+                    <div className="c-list__todo">
+                        {this.todoListItems.map((item, index) => (
+                            <ListItem
+                                key={`Todo List Item ${index}`}
+                                itemNumber={index + 1}
+                                onClick={() => this.changeItemStatus(item.id, 'done')}
+                                {...item}
+                            />
+                        ))}
+                    </div>
+                    <div className="c-list__completed">
+                        {!!this.doneListItems.length && (
+                            <h3>Completed Items</h3>
+                        )}
+                        {this.doneListItems.map((item, index) => (
+                            <ListItem
+                                key={`Done List Item ${index}`}
+                                onClick={() => this.changeItemStatus(item.id, 'todo')}
+                                {...item}
+                            />
+                        ))}
+                    </div>
                 </FormatLayout>
             </div>
         );

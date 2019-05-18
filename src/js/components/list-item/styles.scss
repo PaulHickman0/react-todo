@@ -6,4 +6,10 @@
     background-color: white;
     padding: 12px 24px;
     border: 1px solid #ccc;
+    margin-bottom: 8px;
+    cursor: pointer;
+
+    &.is-done {
+        text-decoration: line-through;
+    }
 }
