@@ -31,8 +31,12 @@ export default class ListItem extends PureComponent {
      * Prevents event bubbling and calls onRemove prop
      * @param  {Event} e    - Event object sent from onClick
      */
-    onRemove(e) {
-        e.stopPropagation();
+    onRemove(e = {}) {
+
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        }
+        
         this.props.onRemove();
     }
 
