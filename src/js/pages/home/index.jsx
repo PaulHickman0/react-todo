@@ -106,6 +106,12 @@ export class Home extends Component {
         });
     }
 
+    removeItemsByStatus(status = 'done') {
+       this.setState({
+            listItems: this.state.listItems.filter(item => item.status !== status)
+        }); 
+    }
+
     render() {
 
         const { newItemText } = this.state;
@@ -139,18 +145,24 @@ export class Home extends Component {
                             />
                         ))}
                     </div>
-                    <div className="c-list__completed">
-                        {!!this.doneListItems.length && (
+                    {!!this.doneListItems.length && (
+                        <div className="c-list__completed">
                             <h3>Completed Items</h3>
-                        )}
-                        {this.doneListItems.map((item, index) => (
-                            <ListItem
-                                key={`Done List Item ${index}`}
-                                onClick={() => this.changeItemStatus(item.id, 'todo')}
-                                {...item}
-                            />
-                        ))}
-                    </div>
+                            <button
+                                className="o-button o-button--sm o-button--rounded"
+                                onClick={() => this.removeItemsByStatus('done')}
+                            >
+                                Clear Completed Items
+                            </button>
+                            {this.doneListItems.map((item, index) => (
+                                <ListItem
+                                    key={`Done List Item ${index}`}
+                                    onClick={() => this.changeItemStatus(item.id, 'todo')}
+                                    {...item}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </FormatLayout>
             </div>
         );

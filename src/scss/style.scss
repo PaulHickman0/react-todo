@@ -53,6 +53,20 @@ h1 {
     &:hover {
         background-color: $primary--hover
     }
+
+    &--rounded {
+        color: #333;
+        border-radius: 12px;
+        background-color: #bbb;
+
+        &:hover {
+            background-color: #ccc
+        }
+    }
+
+    &--sm {
+        font-size: 14px;
+    }
 }
 
 .o-text-input {
