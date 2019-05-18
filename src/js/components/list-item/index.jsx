@@ -8,17 +8,32 @@ export default class ListItem extends PureComponent {
         message: PropTypes.string,
         itemNumber: PropTypes.oneOfType(PropTypes.number, PropTypes.string),
         onClick: PropTypes.func,
+        status: PropTypes.oneOf('done', 'todo'),
+        onRemove: PropTypes.func,
     };
 
     // Default props
     static defaultProps = {
         message: '',
         itemNumber: '',
-        onClick: () => null
+        onClick: () => null,
+        status: 'todo',
+        onRemove: () => null,
     };
 
     constructor(props) {
         super(props);
+        this.onRemove = this.onRemove.bind(this);
+    }
+
+    /**
+     * Called when remove 'x' is clicked
+     * Prevents event bubbling and calls onRemove prop
+     * @param  {Event} e    - Event object sent from onClick
+     */
+    onRemove(e) {
+        e.stopPropagation();
+        this.props.onRemove();
     }
 
     render() {
@@ -31,6 +46,12 @@ export default class ListItem extends PureComponent {
                 onClick={onClick}
             >
                 <h4>{itemNumber ? `${itemNumber}. ` : ''}{message}</h4>
+                <div
+                    className="c-list-item__remove"
+                    onClick={this.onRemove}
+                >
+                    X
+                </div>
             </div>
         );
     }

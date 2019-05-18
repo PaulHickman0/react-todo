@@ -26,7 +26,9 @@ export class Home extends Component {
         this.state = {
             listItems: [],
             newItemText: ''
-        }
+        };
+
+        this.idCount = 0;
 
         this.onInputValueChange = this.onInputValueChange.bind(this);
         this.onInputKeyUp = this.onInputKeyUp.bind(this);
@@ -80,7 +82,7 @@ export class Home extends Component {
                 {
                     message: itemText,
                     status: 'todo',
-                    id: listItems.length + 1,
+                    id: this.idCount++,
                 }
             ]
         })
@@ -106,10 +108,24 @@ export class Home extends Component {
         });
     }
 
+    /**
+     * Removes all items of a certain status from list of items
+     * @param  {String} status    - Status to remove  eg. done
+     */
     removeItemsByStatus(status = 'done') {
        this.setState({
             listItems: this.state.listItems.filter(item => item.status !== status)
         }); 
+    }
+
+    /**
+     * Removes item by ID from list of items
+     * @param  {Number} id    - Item of item to remove
+     */
+    removeItemByID(id) {
+        this.setState({
+            listItems: this.state.listItems.filter(item => item.id !== id)
+        });
     }
 
     render() {
@@ -141,6 +157,7 @@ export class Home extends Component {
                                 key={`Todo List Item ${index}`}
                                 itemNumber={index + 1}
                                 onClick={() => this.changeItemStatus(item.id, 'done')}
+                                onRemove={() => this.removeItemByID(item.id)}
                                 {...item}
                             />
                         ))}
@@ -158,6 +175,7 @@ export class Home extends Component {
                                 <ListItem
                                     key={`Done List Item ${index}`}
                                     onClick={() => this.changeItemStatus(item.id, 'todo')}
+                                    onRemove={() => this.removeItemByID(item.id)}
                                     {...item}
                                 />
                             ))}
