@@ -40,3 +40,27 @@ h1 {
         color: #337acc;
     }
 }
+
+.o-button {
+    padding: 8px;
+    background-color: $primary;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+
+    &:hover {
+        background-color: $primary--hover
+    }
+}
+
+.o-text-input {
+    border: #eee;
+    padding: 12px;
+
+
+    &:focus {
+        outline: none;
+    }
+}

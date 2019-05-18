@@ -3,3 +3,14 @@
 .home {
 
 }
+
+.c-add-to-list {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding-bottom: 64px;
+
+    .o-text-input {
+        flex-grow: 1
+    }
+}
